@@ -10,17 +10,17 @@
 </head>
 
 <body>
-    <header>
+    <header id="header">
         <nav>
             <a id="high-score" class="score" href="">Veiw High Score</a>
-            <div class="h2-wrapper">    
+            <div class="h2-wrapper">
                 <h2 class="time-limit">Time:</h2>
                 <h2 id="time">60</h2>
             </div>
         </nav>
     </header>
 
-    <hero>
+    <hero id="hero">
         <h1>Coding Quiz Challenge</h1>
         <p>Try to anser the following code-related questions within the time limit. Keep in mind that incorect answers
             will penalize your score/time by ten seconds!</p>
@@ -30,7 +30,23 @@
         <div class="button-wrapper">
             <button id="btn" class="button">Start Quiz</button>
         </div>
+
+        <div id="modal" class="modal-css">
+            <section id="modal-content" class="modal-class">
+                <h1 id="question"></h1>
+                <p id="answer1"></p>
+                <p id="answer2"></p>
+                <p id="answer3"></p>
+                <p id="answer4"></p>
+            </section>
+        </div>
     </main>
+
+    <footer id="footer" class="footer">
+        <h2 id="footer-h2" class="h2-footer"></h2>
+    </footer>
+
+
     <script src="./assets/script.js"></script>
 
 
