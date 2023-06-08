@@ -12,31 +12,42 @@
 // }, 1000);
 var button = document.querySelector('#btn')
 var htmlTimer = document.querySelector("#time");
-var duration = 60;
+//var duration = 60;
 
 
 button.addEventListener('click', function () {
   // Calculate the target time
-  var targetTime = Date.now() + duration * 1000;
-
+  //var targetTime = Date.now() + duration * 1000;
+  var duration = 60;
   // Update the timer every second
   var timer = setInterval(function () {
     // Get the current time
-    var currentTime = Date.now();
+    //var currentTime = Date.now();
+     // Check if the timer has reached 0
+
+     if (duration <= 0) {
+      // Timer has finished, stop the interval
+      clearInterval(timer);
+      htmlTimer.innerText = "Times Up!";
+    } else{
+      duration--;
+      htmlTimer.innerText = duration;
+    }
+    //console.log(currentTime)
 
     // Calculate the remaining time in seconds
-    var remainingTime = Math.floor((targetTime - currentTime) / 1000);
+    //var remainingTime = Math.floor((targetTime - currentTime) / 1000);
 
     // Display the remaining time
     //console.log("Remaining Time:", remainingTime, "seconds");
-    htmlTimer.textContent = remainingTime
+    //htmlTimer.innerText = remainingTime
 
     // Check if the timer has reached 0
-    if (remainingTime <= 0) {
+    //if (remainingTime <= 0) {
       // Timer has finished, stop the interval
-      clearInterval(timer);
-      htmlTimer.textContent = "Times Up!";
-    }
+      //clearInterval(timer);
+      //htmlTimer.innerText = "Times Up!";
+    //}
     //console.log(currentTime)
 
   }, 1000);

@@ -58,12 +58,13 @@ hero p{
     margin-top: 4%;
 }
 
-button{
+.button-wrapper button{
     border-radius: 25px;
     background-color: darkcyan;
     color: white;
     width: 100px;
     height: 50px;
+    cursor: pointer;
 
 }
 
@@ -93,7 +94,7 @@ button:hover{
     background-color: lightslategray;
 } */
 
-.modal-class p{
+.modal-class button{
     display: flex;
     flex-direction: column;
     background-color: darkcyan;
@@ -102,9 +103,11 @@ button:hover{
     padding: 2%;
     margin: 4%;
     width: 100%;
-    height: 5%;
+    height: 7%;
     color: white;
-    text-align: center;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer{
@@ -128,6 +131,18 @@ button:hover{
     border-radius: 25px;
 }
 
-.modal-class p:hover{
+.modal-class button:hover{
     translate: 10px;
+}
+
+@media (max-width: 700px) {
+    .footer {
+       bottom: 1%;
+    }
+}
+
+@media (max-height: 400px) {
+    .footer {
+       bottom: 1%;
+    }
 }
