@@ -9,7 +9,7 @@ var questionIndex = 0;
 var footer = document.querySelector('#footer');
 var footerH2 = document.querySelector('#footer-h2');
 
-button.addEventListener('click', function () {
+function createQuestion() {
 
   var h1 = document.querySelector('#question');
   var p0 = document.querySelector('#answer1');
@@ -64,7 +64,7 @@ button.addEventListener('click', function () {
   } else {
     endGame(false);
   }
-});
+};
 
 
 function choice(eventObj) {
@@ -78,8 +78,9 @@ function choice(eventObj) {
   if (btnText === correct) {
     console.log('Correct!');
     //footerH2.innerText = "Correct";
-    if (questionIndex < 5) {
+    if (questionIndex <= 5) {
       //button.click();
+      createQuestion();
       footerH2.innerText = "Correct";
     } else {
       endGame(false);
@@ -90,14 +91,16 @@ function choice(eventObj) {
     footerH2.innerText = "Wrong";
   }
 
+  
+
   //questionIndex++;
 }
 
 function endGame(timeDone) {
   if (timeDone) {
-    htmlTimer.innerText = "Times Up!";
+    htmlTimer.style.display = "none";
     modal.style.display = "none";
-    //footer.style.display = "none"
+    footer.style.display = "none"
 
   } else {
     console.log('You Win!')
@@ -139,3 +142,4 @@ button.addEventListener('click', function () {
 });
 
 modal.addEventListener('click', choice);
+button.addEventListener('click', createQuestion);
