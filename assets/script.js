@@ -1,28 +1,13 @@
-//var timer = 60;
-//var seconds = Date.now() + timer * 1000;
-// var interval = setInterval(function () {
-//     var timeCurrent = Date.now();
-//     var timeRemaining = Math.floor((interval - timeCurrent) / 1000);
-//     console.log('Remaining Time', timeRemaining));
-
-//     if (timeRemaining <= 0) {
-//     clearInterval(interval);
-//     alert('Times Up');
-//     }
-// }, 1000);
 var button = document.querySelector('#btn')
 var htmlTimer = document.querySelector("#time");
-//var duration = 60;
 
 
 button.addEventListener('click', function () {
   // Calculate the target time
-  //var targetTime = Date.now() + duration * 1000;
   var duration = 60;
   // Update the timer every second
   var timer = setInterval(function () {
     // Get the current time
-    //var currentTime = Date.now();
      // Check if the timer has reached 0
 
      if (duration <= 0) {
@@ -33,22 +18,6 @@ button.addEventListener('click', function () {
       duration--;
       htmlTimer.innerText = duration;
     }
-    //console.log(currentTime)
-
-    // Calculate the remaining time in seconds
-    //var remainingTime = Math.floor((targetTime - currentTime) / 1000);
-
-    // Display the remaining time
-    //console.log("Remaining Time:", remainingTime, "seconds");
-    //htmlTimer.innerText = remainingTime
-
-    // Check if the timer has reached 0
-    //if (remainingTime <= 0) {
-      // Timer has finished, stop the interval
-      //clearInterval(timer);
-      //htmlTimer.innerText = "Times Up!";
-    //}
-    //console.log(currentTime)
 
   }, 1000);
 
@@ -77,13 +46,13 @@ button.addEventListener('click', function () {
   //header.style.display = 'none';
   //console.log(modal.section.style.display);
 
-  var data = [
-    {
-      question: 'What does the acronym D.O.M. stand for?',
-      choices: ['Dog Only Members', 'Document Object Model', 'Dancing On Mercury', 'Document On Memory'],
-      answer: 'Document Object Model'
-    }
-  ];
+  // var data = [
+  //   {
+  //     question: 'What does the acronym D.O.M. stand for?',
+  //     choices: ['Dog Only Members', 'Document Object Model', 'Dancing On Mercury', 'Document On Memory'],
+  //     answer: 'Document Object Model'
+  //   }
+  // ];
 
   for (var index = 0; index < data.length; index++) {
     var questionObj = data[index];
@@ -102,8 +71,35 @@ button.addEventListener('click', function () {
   section.append(p3);
   footer.append(footerH2);
 
-  console.log(footer);
+  //console.log(footer);
 
-  console.log(questionObj.answer);
+  //console.log(questionObj.answer);
   }
 });
+
+var questionIndex = 0;
+
+function choice(eventObj){
+  var btn = eventObj.target;
+  var btnText = btn.innerText;
+
+  if (button.innerText === correct){
+    console.log('Correct!');
+    timeDone(false);
+    questionIndex++;
+
+  } else{
+    console.log('Wrong')
+    duration -=5;
+  }
+}
+
+function endGame(timeDone){
+  if(timeDone){
+    console.log('Times Up!');
+
+  } else{
+    console.log('You Win!')
+  }
+}
+
