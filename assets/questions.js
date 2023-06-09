@@ -101,12 +101,9 @@ var data = [
       answer: 'To enforce stricter syntax rules and prevent the use of certain error-prone features.'
     },
     {
-      question: 'What is the difference between synchronous and asynchronous programming?',
-      choices: ['Synchronous programming executes tasks sequentially and blocks further execution until a task is completed, while asynchronous programming allows multiple tasks to be executed concurrently.',
-                'Synchronous programming executes tasks concurrently and allows further execution even if a task is not completed, while asynchronous programming executes tasks sequentially and blocks further execution until a task is completed.',
-                'Synchronous programming is used for client-side scripting, while asynchronous programming is used for server-side scripting.',
-                'Synchronous programming is used for user interface design, while asynchronous programming is used for database management.'],
-      answer: 'Synchronous programming executes tasks sequentially and blocks further execution until a task is completed, while asynchronous programming allows multiple tasks to be executed concurrently.'
+        question: 'What is the purpose of CSS?',
+        choices: ['To add interactivity to web pages.', 'To structure and style web pages.', 'To perform server-side processing.', 'To handle database operations.'],
+        answer: 'To structure and style web pages.'
     },
     {
       question: 'What is the purpose of the "fetch" API in JavaScript?',

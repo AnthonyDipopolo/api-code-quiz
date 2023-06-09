@@ -1,27 +1,12 @@
-var button = document.querySelector('#btn')
+var button = document.querySelector('#btn');
 var htmlTimer = document.querySelector("#time");
-
-
-button.addEventListener('click', function () {
-  // Calculate the target time
-  var duration = 60;
-  // Update the timer every second
-  var timer = setInterval(function () {
-    // Get the current time
-     // Check if the timer has reached 0
-
-     if (duration <= 0) {
-      // Timer has finished, stop the interval
-      clearInterval(timer);
-      htmlTimer.innerText = "Times Up!";
-    } else{
-      duration--;
-      htmlTimer.innerText = duration;
-    }
-
-  }, 1000);
-
-});
+var modal = document.querySelector('#modal-content');
+//var questionObj = data;
+var correct = '';
+//var questionObj = index[0];
+var duration = 60;
+var questionIndex = 0;
+var footer = document.querySelector('#footer');
 
 button.addEventListener('click', function () {
 
@@ -43,63 +28,112 @@ button.addEventListener('click', function () {
   hero.style.display = 'none';
   button.style.display = 'none';
 
-  //header.style.display = 'none';
-  //console.log(modal.section.style.display);
+  if (questionIndex < 5) {
 
-  // var data = [
-  //   {
-  //     question: 'What does the acronym D.O.M. stand for?',
-  //     choices: ['Dog Only Members', 'Document Object Model', 'Dancing On Mercury', 'Document On Memory'],
-  //     answer: 'Document Object Model'
-  //   }
-  // ];
+    var randomIndex = Math.floor(Math.random() * data.length);
+    var questionObj = data[randomIndex];
 
-  for (var index = 0; index < data.length; index++) {
-    var questionObj = data[index];
-  
-  h1.innerText = questionObj.question;
-  p0.innerText = questionObj.choices[0];
-  p1.innerText = questionObj.choices[1];
-  p2.innerText = questionObj.choices[2];
-  p3.innerText = questionObj.choices[3];
-  footer.innerText = questionObj.answer;
+    var footerH2 = document.querySelector('#footer-h2');
+    footer.innerText = ''; // Clear any previous content
+    
 
-  section.append(h1);
-  section.append(p0);
-  section.append(p1);
-  section.append(p2);
-  section.append(p3);
-  footer.append(footerH2);
 
-  //console.log(footer);
+    // for (var index = 0; index < data.length; index++) {
+    //   var questionObj = data[index];
 
-  //console.log(questionObj.answer);
+    h1.innerText = questionObj.question;
+    p0.innerText = questionObj.choices[0];
+    p1.innerText = questionObj.choices[1];
+    p2.innerText = questionObj.choices[2];
+    p3.innerText = questionObj.choices[3];
+    //footer.innerText = questionObj.answer;
+    correct = questionObj.answer;
+
+    section.append(h1);
+    section.append(p0);
+    section.append(p1);
+    section.append(p2);
+    section.append(p3);
+    footer.append(footerH2);
+
+    //console.log(footer);
+
+    //console.log(questionObj.answer);
+    questionIndex++;
+  } else {
+    endGame(false);
   }
 });
 
-var questionIndex = 0;
 
-function choice(eventObj){
+function choice(eventObj) {
   var btn = eventObj.target;
   var btnText = btn.innerText;
+  //var footer = document.querySelector('#footer');
 
-  if (button.innerText === correct){
+  console.log(eventObj);
+  console.log(btnText);
+
+  if (btnText === correct) {
     console.log('Correct!');
-    timeDone(false);
-    questionIndex++;
-
-  } else{
-    console.log('Wrong')
-    duration -=5;
+    footer.innerText = "Correct";
+    if (questionIndex < 5) {
+      button.click();
+    } else {
+      endGame(false);
+    }
+  } else {
+    console.log('Wrong');
+    duration -= 5;
+    footer.innerText = "Wrong";
   }
+
+  //questionIndex++;
 }
 
-function endGame(timeDone){
-  if(timeDone){
-    console.log('Times Up!');
+function endGame(timeDone) {
+  if (timeDone) {
+    htmlTimer.innerText = "Times Up!";
+    modal.style.display = "none";
+    footer.style.display = "none"
 
-  } else{
+  } else {
     console.log('You Win!')
+    endGame(true);
+
   }
 }
 
+
+button.addEventListener('click', function () {
+  // Calculate the target time
+  // Update the timer every second
+  var timer = setInterval(function () {
+
+    duration--;
+
+    htmlTimer.innerText = duration;
+
+    if (duration <= 0 || questionIndex > 5) {
+      clearInterval(timer);
+      endGame(true);
+    }
+
+
+    // Get the current time
+    // Check if the timer has reached 0
+
+    //if (duration <= 0) {
+    // Timer has finished, stop the interval
+    //   clearInterval(timer);
+    //   htmlTimer.innerText = "Times Up!";
+    // } else{
+    //   duration--;
+    //   htmlTimer.innerText = duration;
+    // }
+
+  }, 1000);
+
+});
+
+modal.addEventListener('click', choice);
