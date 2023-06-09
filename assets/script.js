@@ -7,6 +7,7 @@ var correct = '';
 var duration = 60;
 var questionIndex = 0;
 var footer = document.querySelector('#footer');
+var footerH2 = document.querySelector('#footer-h2');
 
 button.addEventListener('click', function () {
 
@@ -15,7 +16,7 @@ button.addEventListener('click', function () {
   var p1 = document.querySelector('#answer2');
   var p2 = document.querySelector('#answer3');
   var p3 = document.querySelector('#answer4');
-  var section = document.querySelector('#modal-content');
+  //var section = document.querySelector('#modal-content');
   var modal = document.querySelector('#modal');
   var hero = document.querySelector('#hero');
   var button = document.querySelector('#btn');
@@ -33,9 +34,9 @@ button.addEventListener('click', function () {
     var randomIndex = Math.floor(Math.random() * data.length);
     var questionObj = data[randomIndex];
 
-    var footerH2 = document.querySelector('#footer-h2');
-    footer.innerText = ''; // Clear any previous content
-    
+    // var footerH2 = document.querySelector('#footer-h2');
+    footerH2.innerText = ''; // Clear any previous content
+
 
 
     // for (var index = 0; index < data.length; index++) {
@@ -49,12 +50,12 @@ button.addEventListener('click', function () {
     //footer.innerText = questionObj.answer;
     correct = questionObj.answer;
 
-    section.append(h1);
-    section.append(p0);
-    section.append(p1);
-    section.append(p2);
-    section.append(p3);
-    footer.append(footerH2);
+    // section.append(h1);
+    // section.append(p0);
+    // section.append(p1);
+    // section.append(p2);
+    // section.append(p3);
+    // footer.append(footerH2);
 
     //console.log(footer);
 
@@ -76,16 +77,17 @@ function choice(eventObj) {
 
   if (btnText === correct) {
     console.log('Correct!');
-    footer.innerText = "Correct";
+    //footerH2.innerText = "Correct";
     if (questionIndex < 5) {
-      button.click();
+      //button.click();
+      footerH2.innerText = "Correct";
     } else {
       endGame(false);
     }
   } else {
     console.log('Wrong');
     duration -= 5;
-    footer.innerText = "Wrong";
+    footerH2.innerText = "Wrong";
   }
 
   //questionIndex++;
@@ -95,7 +97,7 @@ function endGame(timeDone) {
   if (timeDone) {
     htmlTimer.innerText = "Times Up!";
     modal.style.display = "none";
-    footer.style.display = "none"
+    //footer.style.display = "none"
 
   } else {
     console.log('You Win!')
