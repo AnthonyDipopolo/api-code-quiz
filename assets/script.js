@@ -1,6 +1,7 @@
 var button = document.querySelector('#btn');
 var htmlTimer = document.querySelector("#time");
 var modal = document.querySelector('#modal-content');
+var score = document.querySelector('#scores-section');
 //var questionObj = data;
 var correct = '';
 //var questionObj = index[0];
@@ -8,6 +9,8 @@ var duration = 60;
 var questionIndex = 0;
 var footer = document.querySelector('#footer');
 var footerH2 = document.querySelector('#footer-h2');
+var input = document.querySelector('#initials-input');
+var viewHighScores = document.querySelector('#view-high-score');
 
 function createQuestion() {
 
@@ -100,10 +103,12 @@ function endGame(timeDone) {
   if (timeDone) {
     htmlTimer.style.display = "none";
     modal.style.display = "none";
-    footer.style.display = "none"
+    footer.style.display = "none";
+    score.style.display = "flex";
+    saveScore();
 
   } else {
-    console.log('You Win!')
+    //console.log('You Win!')
     endGame(true);
 
   }
@@ -141,5 +146,97 @@ button.addEventListener('click', function () {
 
 });
 
+function saveScore() {
+  var initials = input.value.trim();
+  
+  if (initials !== "") {
+    var userScore = {
+      initials: initials,
+      score: duration
+    };
+  
+    var scoresArray = getScoresData();
+    scoresArray.push(userScore);
+  
+    saveScoresData(scoresArray);
+    showScores();
+  
+    clearData();
+  }
+}
+
+function getScoresData() {
+  var scoresData = localStorage.getItem('quizScores');
+  var parsed = JSON.parse(scoresData) || [];
+  
+  return parsed;
+}
+
+function saveScoresData(arr) {
+  var jsonVal = JSON.stringify(arr);
+  localStorage.setItem('quizScores', jsonVal);
+}
+
+function showScores() {
+  var scores = getScoresData();
+  var scoresContainer = document.querySelector('#scores-container');
+  
+  scoresContainer.innerHTML = '';
+  
+  if (scores.length === 0) {
+    scoresContainer.innerHTML = '<p>No high scores have been recorded.</p>';
+  }
+  
+  for (var scoreObj of scores) {
+    var div = document.createElement('div');
+    div.classList.add('scoreBoard');
+  
+    var h3 = document.createElement('h3');
+    h3.innerText = `Initials: ${scoreObj.initials}`;
+    div.append(h3);
+  
+    var p = document.createElement('p');
+    p.innerText = `Score: ${scoreObj.score}`;
+    div.append(p);
+  
+    scoresContainer.append(div);
+  }
+}
+
+function clearData() {
+  input.value = ''; // Clear the input field
+}
+
+function saveData(eventObj) {
+  if (eventObj.keyCode === 13) {
+    saveScore();
+  }
+}
+
+// function saveScoresData(arr) {
+//   var jsonVal = JSON.stringify(arr);
+//   localStorage.setItem('quizScores', jsonVal);
+// }
+
+function GameOverPage() {
+   if (modal.style.display !== 'none') {
+    htmlTimer.style.display = 'none';
+    modal.style.display = 'none';
+    footer.style.display = 'none';
+    score.style.display = 'flex';
+    saveScore();
+    createQuestion();
+  }
+
+}
+
+
+
+
+
 modal.addEventListener('click', choice);
 button.addEventListener('click', createQuestion);
+input.addEventListener('keydown', saveData);
+viewHighScores.addEventListener('click', GameOverPage);
+
+showScores();
